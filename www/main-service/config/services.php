@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'reward_service' => [
+        'url' => 'http://host.docker.internal:9080',
+        'token' => 'token'
+    ]
+
 ];
