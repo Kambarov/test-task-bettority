@@ -54,10 +54,8 @@ class AuthController extends Controller
                 ->getUserRewards(userId: $request->user()->id);
 
             return response()->json([
-                [
-                    'user' => $request->user(),
-                    'rewards' => $rewards
-                ]
+                'user' => $request->user(),
+                'rewards' => $rewards
             ]);
         } catch (\Exception $exception) {
             return response()->json([

@@ -21,8 +21,22 @@ class RewardServiceTest extends TestCase
         $response
             ->assertStatus(200)
             ->assertExactJsonStructure([
-                'user',
-                'rewards'
+                'user' => [
+                    'id',
+                    'email',
+                    'name',
+                    'email_verified_at',
+                    'created_at',
+                    'updated_at'
+                ],
+                'rewards' => [
+                    '*' => [
+                        'id',
+                        'title',
+                        'description',
+                        'amount'
+                    ]
+                ]
             ]);
     }
 }

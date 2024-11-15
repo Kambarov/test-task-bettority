@@ -25,7 +25,7 @@ final readonly class RewardService
             throw new \Exception('External Request failed');
         }
 
-        return $response->json();
+        return $response->json('data');
     }
 
     /**

@@ -20,7 +20,7 @@ class RewardService
     {
         return Reward::query()
             ->leftJoin('reward_user', 'rewards.id', '=', 'reward_user.reward_id')
-            ->where('reward_user.user_id', $userId)
+            ->where('reward_user.user_id', '=', $userId)
             ->get();
 
     }

@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Reward;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class CrudRewardTest extends TestCase
@@ -32,7 +33,9 @@ class CrudRewardTest extends TestCase
 
     public function test_get_rewards_list_by_user_id()
     {
-        Reward::factory()->createMany(10);
+        $reward = Reward::factory()->create();
+
+        $this->post(sprintf('/api/rewards/%s/1/attach', $reward->id));
 
         $response = $this->get('/api/rewards/user/1');
 

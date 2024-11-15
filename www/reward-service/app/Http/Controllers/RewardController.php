@@ -14,15 +14,13 @@ use Illuminate\Support\Facades\DB;
 
 class RewardController extends Controller
 {
-    public function __construct(public readonly RewardService $rewardService)
-    {
-    }
+    public function __construct(public readonly RewardService $rewardService) {}
 
     public function index(): AnonymousResourceCollection
     {
-        $rewards = Cache::remember('rewards_list', config('cache.default_ttl'), function () {
-            return $this->rewardService->all();
-        });
+        $rewards = Cache::remember('rewards_list', config('cache.default_ttl'),
+            fn() => $this->rewardService->all()
+        );
 
         return RewardResource::collection($rewards);
     }
@@ -101,7 +99,12 @@ class RewardController extends Controller
 
     public function getByUserId(int $userId): AnonymousResourceCollection
     {
-        $rewards = $this->rewardService->getByUserId($userId);
+        $rewards = Cache::remember(
+            sprintf('user_rewards_list_%s', $userId),
+            config('cache.default_ttl'),
+            fn() => $this->rewardService->getByUserId($userId)
+        );
+
         return RewardResource::collection($rewards);
     }
 
