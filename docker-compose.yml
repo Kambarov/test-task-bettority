@@ -7,8 +7,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root_password
       MYSQL_DATABASE: rewards
-      MYSQL_USER: laravel
-      MYSQL_PASSWORD: secret
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 1111
     ports:
       - "3306:3306"
     volumes:
@@ -23,7 +23,7 @@ services:
     container_name: redis
     restart: unless-stopped
     ports:
-      - "6379:6379"
+      - "6380:6380"
     networks:
       - app_network
 
@@ -50,8 +50,8 @@ services:
     container_name: nginx
     restart: unless-stopped
     ports:
-      - "8080:8080"
-      - "8081:8081"
+      - "9080:9080"
+      - "9081:9081"
     volumes:
       - ./:/var/www
       - ./nginx/conf.d:/etc/nginx/conf.d
